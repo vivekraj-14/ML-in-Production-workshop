@@ -4,7 +4,7 @@ from html import escape
 
 import joblib
 import numpy as np
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Response
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -83,7 +83,7 @@ class PredictionResponse(BaseModel):
 
 app = FastAPI(
     title="Flight Price Prediction API",
-    description="Predict flight prices using the trained Random Forest model.",
+    description="Predict flight prices using the trained Decision Tree regression model.",
     version="1.0.0",
 )
 
@@ -237,6 +237,11 @@ def health() -> dict[str, str | bool]:
         "status": "ok" if MODEL_LOADED else "error",
         "model_loaded": MODEL_LOADED,
     }
+
+
+@app.head("/", include_in_schema=False)
+def root_head() -> Response:
+    return Response(status_code=200)
 
 
 def build_model_row(features: FlightFeatures) -> np.ndarray:

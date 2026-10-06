@@ -1,7 +1,7 @@
 # Flight Price Prediction API
 
 A FastAPI application that predicts flight ticket prices using a trained
-Random Forest regression model stored in `model.pkl`. The project includes a
+Decision Tree regression model stored in `model.pkl`. The project includes a
 browser-based prediction form and JSON API endpoints.
 
 ## Project structure
